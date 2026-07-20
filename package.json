@@ -1,0 +1,14 @@
+{
+  "name": "ai-voice-call-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local web app for AI voice calls with a user-provided API key.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

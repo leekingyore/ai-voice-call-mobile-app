@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080b12" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="AI 语音通话" />
+    <title>AI 语音通话</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Realtime Voice App</p>
+          <h1>AI 语音通话</h1>
+          <p class="subtitle">
+            填写 API Key，选择语音和模型，即可通过浏览器麦克风与 AI 实时对话。
+          </p>
+        </div>
+        <div class="status-card" aria-live="polite">
+          <span id="statusDot" class="status-dot"></span>
+          <div>
+            <strong id="statusTitle">未连接</strong>
+            <p id="statusText">填写信息后点击“开始通话”。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <form id="callForm" class="panel">
+          <h2>连接设置</h2>
+
+          <label>
+            <span>API Key</span>
+            <input
+              id="apiKey"
+              name="apiKey"
+              type="password"
+              autocomplete="off"
+              placeholder="sk-..."
+              required
+            />
+          </label>
+
+          <div class="two-columns">
+            <label>
+              <span>模型</span>
+              <input id="model" name="model" value="gpt-realtime" required />
+            </label>
+
+            <label>
+              <span>语音</span>
+              <select id="voice" name="voice">
+                <option value="alloy">alloy</option>
+                <option value="ash">ash</option>
+                <option value="ballad">ballad</option>
+                <option value="coral">coral</option>
+                <option value="echo">echo</option>
+                <option value="sage">sage</option>
+                <option value="shimmer">shimmer</option>
+                <option value="verse">verse</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>AI 角色提示词</span>
+            <textarea id="instructions" name="instructions" rows="5">你是一个自然、友好、简洁的中文语音助手。优先使用中文回答。</textarea>
+          </label>
+
+          <div class="notice">
+            手机使用时，请通过部署后的 HTTPS 网址打开。API Key 会发送给后端接口，用于换取一次性临时密钥；正式上线建议改成登录用户鉴权。
+          </div>
+
+          <div class="actions">
+            <button id="startBtn" class="primary" type="submit">开始通话</button>
+            <button id="muteBtn" type="button" disabled>静音</button>
+            <button id="hangupBtn" class="danger" type="button" disabled>挂断</button>
+          </div>
+        </form>
+
+        <section class="panel conversation-panel">
+          <div class="panel-header">
+            <h2>通话记录</h2>
+            <button id="clearBtn" type="button" class="ghost">清空</button>
+          </div>
+          <div id="transcript" class="transcript" aria-live="polite">
+            <p class="placeholder">通话开始后，AI 的文本片段和状态事件会显示在这里。</p>
+          </div>
+        </section>
+      </section>
+
+      <audio id="remoteAudio" autoplay></audio>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
